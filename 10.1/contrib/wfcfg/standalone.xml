@@ -139,6 +139,34 @@
                         <password>sa</password>
                     </security>
                 </datasource>
+				<datasource jndi-name="java:jboss/${env.OPENSHIFT_ORACLE_DATASOURCE}/${env.OPENSHIFT_ORACLE_DATASOURCE_NAME}" enabled="${oracle.enabled}" use-java-context="true" pool-name="${env.OPENSHIFT_ORACLE_DATASOURCE_NAME}" use-ccm="true">
+                    <connection-url>jdbc:oracle:thin:@${env.OPENSHIFT_ORACLE_DB_HOST}:${env.OPENSHIFT_ORACLE_DB_PORT}:${env.OPENSHIFT_ORACLE_DB_NAME}</connection-url>
+                    <driver>Oracle11g</driver>
+                    <security>
+                      <user-name>${env.OPENSHIFT_ORACLE_DB_USERNAME}</user-name>
+                      <password>${env.OPENSHIFT_ORACLE_DB_PASSWORD}</password>
+                    </security>
+                    <validation>
+                        <validate-on-match>false</validate-on-match>
+                        <background-validation>false</background-validation>
+                    </validation>
+                    <timeout>
+                        <set-tx-query-timeout>false</set-tx-query-timeout>
+                        <blocking-timeout-millis>0</blocking-timeout-millis>
+                        <idle-timeout-minutes>0</idle-timeout-minutes>
+                        <query-timeout>0</query-timeout>
+                        <use-try-lock>0</use-try-lock>
+                        <allocation-retry>0</allocation-retry>
+                        <allocation-retry-wait-millis>0</allocation-retry-wait-millis>
+                    </timeout>
+                    <statement>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
+                     <pool>
+                        <min-pool-size>${env.OPENSHIFT_ORACLE_MIN_POOL_SIZE}</min-pool-size>
+                        <max-pool-size>${env.OPENSHIFT_ORACLE_MAX_POOL_SIZE}</max-pool-size>
+                    </pool>
+                </datasource>
                 <datasource jndi-name="java:jboss/datasources/${env.OPENSHIFT_MYSQL_DATASOURCE}" enabled="${mysql.enabled}" use-java-context="true" pool-name="${env.OPENSHIFT_MYSQL_DATASOURCE}" use-ccm="true">
                     <connection-url>jdbc:mysql://${env.OPENSHIFT_MYSQL_DB_HOST}:${env.OPENSHIFT_MYSQL_DB_PORT}/${env.OPENSHIFT_MYSQL_DB_NAME}</connection-url>
                     <driver>mysql</driver>
